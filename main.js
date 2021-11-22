@@ -60,6 +60,7 @@ const container = document.getElementById('container');
 let post = '';
 
 for (let i = 0; i < posts.length; i++){
+    let ita = itaDate(posts[i].created)
     if (posts[i].author.image != null){
         post += 
         `
@@ -71,7 +72,7 @@ for (let i = 0; i < posts.length; i++){
                         </div>
                         <div class="post-meta__data">
                             <div class="post-meta__author">${posts[i].author.name}</div>
-                            <div class="post-meta__time">${posts[i].created}</div>
+                            <div class="post-meta__time">${ita}</div>
                         </div>                    
                     </div>
                 </div>
@@ -107,7 +108,7 @@ for (let i = 0; i < posts.length; i++){
                         </div>
                         <div class="post-meta__data">
                             <div class="post-meta__author">${posts[i].author.name}</div>
-                            <div class="post-meta__time">${posts[i].created}</div>
+                            <div class="post-meta__time">${ita}</div>
                         </div>                    
                     </div>
                 </div>
@@ -143,4 +144,12 @@ function inCharacter(word){
         }
     }
     return upChar;
+}
+
+function itaDate(date){
+    let newDate = date.split('-');
+    let x = newDate[0];
+    newDate[0] = newDate[2];
+    newDate[2] = x;
+    return newDate[0] + '-' + newDate[1] + '-' + newDate[2];
 }
