@@ -62,7 +62,7 @@ let post = '';
 for (let i = 0; i < posts.length; i++){
     let ita = itaDate(posts[i].created)
     if (posts[i].author.image != null){
-        post += 
+        post = 
         `
             <div class="post">
                 <div class="post__header">
@@ -83,7 +83,7 @@ for (let i = 0; i < posts.length; i++){
                 <div class="post__footer">
                     <div class="likes js-likes">
                         <div class="likes__cta">
-                            <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <a class="like-button  js-like-button" data-postid="1">
                                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                 <span class="like-button__label">Mi Piace</span>
                             </a>
@@ -98,7 +98,7 @@ for (let i = 0; i < posts.length; i++){
     } else {
         console.log(posts[i].author.name)
         let init = inCharacter(posts[i].author.name)
-        post += 
+        post = 
         `
             <div class="post">
                 <div class="post__header">
@@ -119,7 +119,7 @@ for (let i = 0; i < posts.length; i++){
                 <div class="post__footer">
                     <div class="likes js-likes">
                         <div class="likes__cta">
-                            <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <a class="like-button  js-like-button" data-postid="1">
                                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                 <span class="like-button__label">Mi Piace</span>
                             </a>
@@ -132,8 +132,25 @@ for (let i = 0; i < posts.length; i++){
             </div>
         `;
     }
-    
-}   container.innerHTML += post;
+
+    container.innerHTML += post;
+
+}   
+
+let buttons = document.getElementsByClassName('like-button');
+let like = document.getElementsByClassName('js-likes-counter');
+for (let i = 0; i < buttons.length; i++){
+    buttons[i].addEventListener('click', function(){
+        if (buttons[i].classList.contains('like-button--liked')){
+            buttons[i].classList.remove('like-button--liked')
+            like[i].innerHTML = posts[i].likes;
+        } else {
+            buttons[i].classList.add('like-button--liked')
+            like[i].innerHTML = posts[i].likes + 1;
+        }
+        
+    })
+}
 
 
 function inCharacter(word){
